@@ -38,6 +38,7 @@ void initStage(void)
 	initPlayer();
 
 	initMap();
+	initRadar();
 }
 
 static void logic(void)
@@ -59,6 +60,7 @@ static void draw(void)
 	drawEntities();
 
 	drawHud();
+	drawRadar(); //added a hook to render our Radar feature
 }
 
 static void drawHud(void)
@@ -76,44 +78,4 @@ static void drawHud(void)
 	SDL_SetRenderDrawBlendMode(app.renderer, SDL_BLENDMODE_NONE);
 
 	drawText(SCREEN_WIDTH - 5, 5, 255, 255, 255, TEXT_RIGHT, "PIZZA %d/%d", stage.pizzaFound, stage.pizzaTotal);
-	drawText(SCREEN_WIDTH - 1250, 5, 255, 255, 255, TEXT_LEFT, "HEARTS %d/%d", stage.playerHearts, stage.playerHeartsTotal);
-
-	if (stage.playerHearts == 0)
-	{
-		r.x = 320;
-		r.y = 180;
-		r.w = 640;
-		r.h = 360;
-
-		SDL_SetRenderDrawBlendMode(app.renderer, SDL_BLENDMODE_BLEND);
-		SDL_SetRenderDrawColor(app.renderer, 0, 0, 0, 196);
-		SDL_RenderFillRect(app.renderer, &r);
-		SDL_SetRenderDrawBlendMode(app.renderer, SDL_BLENDMODE_NONE);
-
-		drawText(640, 200, 255, 255, 255, TEXT_CENTER, "GAME OVER");
-		drawText(640, 250, 255, 255, 255, TEXT_CENTER, "YOU LOSE");
-
-		drawText(640, 360, 255, 255, 255, TEXT_CENTER, "SCORE: %d", stage.pizzaFound);
-		drawText(640, 450, 255, 255, 255, TEXT_CENTER, "PRESS ENTER TO QUIT");
-	}
-
-	if (stage.pizzaFound == stage.pizzaTotal)
-	{
-		r.x = 320;
-		r.y = 180;
-		r.w = 640;
-		r.h = 360;
-
-		SDL_SetRenderDrawBlendMode(app.renderer, SDL_BLENDMODE_BLEND);
-		SDL_SetRenderDrawColor(app.renderer, 0, 0, 0, 196);
-		SDL_RenderFillRect(app.renderer, &r);
-		SDL_SetRenderDrawBlendMode(app.renderer, SDL_BLENDMODE_NONE);
-
-		drawText(640, 200, 255, 255, 255, TEXT_CENTER, "GAME OVER");
-		drawText(640, 250, 255, 255, 255, TEXT_CENTER, "YOU WIN");
-
-		drawText(640, 360, 255, 255, 255, TEXT_CENTER, "SCORE: %d", stage.pizzaFound);
-		drawText(640, 450, 255, 255, 255, TEXT_CENTER, "PRESS ENTER TO QUIT");
-	}
-}
 }

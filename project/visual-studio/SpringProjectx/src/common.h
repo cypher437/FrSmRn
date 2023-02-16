@@ -14,7 +14,6 @@ extern "C" {
 #include <stdlib.h>
 #include <string.h>
 
-
 #include <defs.h>
 #include <structs.h>
 
@@ -39,17 +38,18 @@ void doInput(void);
 void doPlayer(void);
 void drawEntities(void);
 void drawMap(void);
+void drawRadar(void);
 void drawText(int x, int y, int r, int g, int b, int align, char *format, ...);
 void initBlock(char *line);
 void initEntities(void);
 void initFonts(void);
 void initGame(void);
 void initMap(void);
+void initRadar(void);
+void DrawCircleF(SDL_Renderer* renderer, SDL_FRect circ);
 void initPizza(char *line);
 void initPlatform(char *line);
 void initPlayer(void);
-void initSpikes(char* line);
-void LoseOrWin(void);
 void initSDL(void);
 void initSounds(void);
 void initStage(void);

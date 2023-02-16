@@ -55,9 +55,6 @@ int main(int argc, char *argv[])
 		presentScene();
 
 		capFrameRate(&then, &remainder);
-		
-		LoseOrWin();
-		
 	}
 
 	return 0;

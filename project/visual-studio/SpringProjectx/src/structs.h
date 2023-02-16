@@ -60,12 +60,14 @@ struct Entity {
 	long flags;
 	Entity *riding;
 	Entity *next;
+	TYPE_ENTITY *type;
 };
 
 typedef struct {
 	SDL_Point camera;
+	SDL_Point playerSprite;
 	int map[MAP_WIDTH][MAP_HEIGHT];
 	Entity entityHead, *entityTail;
 	int pizzaTotal, pizzaFound;
-	int playerHearts, playerHeartsTotal;
+	SDL_Rect radar;
 } Stage;

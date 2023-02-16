@@ -39,8 +39,8 @@ void initPlatform(char *line)
 	e->y = e->sy;
 
 	e->tick = tick;
-
-	e->texture = loadTexture("gfx/SMBcloud2.png");
+	e->type = ENTITY_PLATFORM;
+	e->texture = loadTexture("gfx/platform.png");
 	SDL_QueryTexture(e->texture, NULL, NULL, &e->w, &e->h);
 	e->flags = EF_SOLID+EF_WEIGHTLESS+EF_PUSH;
 }

@@ -35,7 +35,7 @@ void initPizza(char *line)
 	sscanf(line, "%*s %f %f", &e->x, &e->y);
 
 	e->health = 1;
-
+	e->type = ENTITY_PIZZA;
 	e->texture = loadTexture("gfx/pizza.png");
 	SDL_QueryTexture(e->texture, NULL, NULL, &e->w, &e->h);
 	e->flags = EF_WEIGHTLESS;

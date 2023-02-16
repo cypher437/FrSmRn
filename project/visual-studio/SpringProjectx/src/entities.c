@@ -292,10 +292,6 @@ static void addEntFromLine(char *line)
 	{
 		initPizza(line);
 	}
-	else if (strcmp(name, "SPIKES") == 0) // if line has "SPIKES"
-	{
-		initSpikes(line); // call from line
-	}
 	else
 	{
 		SDL_LogMessage(SDL_LOG_CATEGORY_APPLICATION, SDL_LOG_PRIORITY_WARN, "Unknown entity '%s'", line);

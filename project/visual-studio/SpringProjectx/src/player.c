@@ -30,14 +30,12 @@ void initPlayer(void)
 	stage.entityTail = player;
 
 	player->health = 1;
-	stage.playerHearts = 3;
-	stage.playerHeartsTotal = 3;
 
 	pete[0] = loadTexture("gfx/pete01.png");
 	pete[1] = loadTexture("gfx/pete02.png");
 
 	player->texture = pete[0];
-
+	player->type = ENTITY_PLAYER;
 	SDL_QueryTexture(player->texture, NULL, NULL, &player->w, &player->h);
 }
 
@@ -45,36 +43,36 @@ void doPlayer(void)
 {
 	player->dx = 0;
 
-	if (stage.playerHearts != 0 && stage.pizzaFound!= stage.pizzaTotal)
+	if (app.keyboard[SDL_SCANCODE_A])
 	{
-		if (app.keyboard[SDL_SCANCODE_A])
-		{
-			player->dx = -PLAYER_MOVE_SPEED;
+		player->dx = -PLAYER_MOVE_SPEED;
 
-			player->texture = pete[1];
-		}
+		player->texture = pete[1];
+	}
 
-		if (app.keyboard[SDL_SCANCODE_D])
-		{
-			player->dx = PLAYER_MOVE_SPEED;
+	if (app.keyboard[SDL_SCANCODE_D])
+	{
+		player->dx = PLAYER_MOVE_SPEED;
 
-			player->texture = pete[0];
-		}
+		player->texture = pete[0];
+	}
 
-		if (app.keyboard[SDL_SCANCODE_SPACE] && player->isOnGround) //changed space to jump rather than i
-		{
-			player->riding = NULL;
+	if (app.keyboard[SDL_SCANCODE_I] && player->isOnGround)
+	{
+		player->riding = NULL;
 
-			player->dy = -20;
+		player->dy = -20;
 
-			playSound(SND_JUMP, CH_PLAYER);
-		}
+		playSound(SND_JUMP, CH_PLAYER);
+	}
 
-		if (app.keyboard[SDL_SCANCODE_I])  // i is now reset.
-		{
-			player->x = player->y = 0;
+	if (app.keyboard[SDL_SCANCODE_SPACE])
+	{
+		player->x = player->y = 0;
+		
+		app.keyboard[SDL_SCANCODE_SPACE] = 0;
+	}
 
-			app.keyboard[SDL_SCANCODE_I] = 0;
-		}
-    }
+	stage.playerSprite.x = (int)player->x + (player->w / 2);
+	stage.playerSprite.y = (int)player->y + (player->h / 2);
 }

@@ -29,12 +29,18 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 #define MAX_TILES    7
 
 #define TILE_SIZE    64
+#define RADAR_SIZE    256 // Size of our Radar view
+#define PADDING    16	// Padding to add to stop it being squashed next to screen
+#define RATIO    10
 
 #define MAP_WIDTH    40
 #define MAP_HEIGHT   20
 
 #define MAP_RENDER_WIDTH    20
 #define MAP_RENDER_HEIGHT   12
+
+#define RADAR_RENDER_WIDTH    1
+#define RADAR_RENDER_HEIGHT   1
 
 #define PLAYER_MOVE_SPEED 6
 
@@ -74,3 +80,13 @@ enum
 	CH_PLAYER,
 	CH_PIZZA
 };
+
+typedef enum
+{
+	ENTITY_UNKNOWN = 0,
+	ENTITY_PIZZA = 1,
+	ENTITY_PLAYER = 2,
+	ENTITY_PLATFORM = 4,
+	ENTITY_ELIVATOR = 8,
+	ENTITY_BLOCK = 16
+} TYPE_ENTITY;
