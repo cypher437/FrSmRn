@@ -1,0 +1,273 @@
+\input{./LatexTut-Header.tex}
+
+\begin{document}
+\author{Lucille L. Blumire, Julian Kunkel}
+\date{Week 8}
+\term{Spring}
+\exercise{8}
+
+\makesheetheader
+
+\section*{Learning Objectives}
+
+\subsection*{Tools}
+
+\begin{itemize}
+  \item Create visually appealing reports using \LaTeX{} and latexmk
+\end{itemize}
+
+\tableofcontents
+
+\tutorial{Introduction to \LaTeX{} for the Project Template}{25}
+
+In the following, we provide a brief \LaTeX{} tutorial that introduces into the usage of our provided template.
+
+\LaTeX{} is a document preparation and typesetting system.
+It is designed for use with technical and scientific documentation, and has become a mainstay of the scientific community due to its ease of use and the professional of the generated documents.
+Many public journals will expect the content submitted to them to initially be constructed in \LaTeX{}.
+
+For your project report, we are mirroring this structure. Some journal format specifications are so common that they are built in as defaults in \LaTeX{}, however as the University of Reading is a university rather than a scientific journal, we have provided a template document instead.
+
+Unlike the other tutorials we have provided you, this one is not intended to be completed within a fixed time period, and is designed to be referenced as and when you require it in order to support your project documentation.
+We will try to complete the tutorial (except the last one) during the practical.
+
+
+\begin{steps}
+\item Boot into Linux. Note that \LaTeX{} is also usable in Windows and MacOS! Details of the installation process are listed as information at the end of this worksheet.
+\item Download our provided \LaTeX{} template from Blackboard.
+\item Compile the template the first time.
+
+To compile your \LaTeX{}, navigate in a terminal emulator or command shell to the directory you have stored your project tex files (and the code delta's PDF). If you have not been provided with an example code deltas, consult the contents of \verb|appendix_code.tex| to learn how to generate this from the initial source code.
+
+Once you have all of the files in one location, and have navigated there in your terminal emulator, run the following command.
+
+\begin{lstlisting}[language=bash]
+$ latexmk -pdf project-report-template.tex
+\end{lstlisting}
+
+This should after a short while of compiling generate the file \verb|project-report-template.pdf|.
+
+\item Open the directory of the template with Atom and project-report-template.tex.
+
+\item Look at the Basic Structure of a \LaTeX{} Document and try to infer the meaning by comparing the PDF with the source code.
+
+\LaTeX{} documents follow a fairly rigid structure.
+The core overarching structure might look something like the one below.
+Compare it to the structure used in \verb|project-report-template.tex|.
+
+\includeLaTeX{./examples/ex1}
+
+\item For your project, you will need to set the Title and Author. You can find both of these by searching for `USER SETTINGS' in the \verb|project-report-template.tex| file.
+Once those are set, most of the rest of your edits will be made to \verb|main.tex|.
+Then recompile the code and see the changes.
+
+\item Now open \verb|main.tex| in Atom and perform the following operations.
+
+\item Insert \verb|\textbf{This is my first bold text}| at the beginning and recompile the code to see the changes.
+
+\item Try to remove the inclusion of the extra code in the \LaTeX{} file, therefore: Search for \verb|example.cpp| in the file and comment this block out using the \% sign to comment text until the end of the Line. Rebuild the PDF.
+\end{steps}
+
+You will find additional introductions regarding \LaTeX{} below.
+
+\groupwork{Using \LaTeX{} to Document your Project}{25}
+
+As part of this groupwork, you will start to document your thoughts regarding the project into the template.
+This task is no rigid teamwork but you should consider your team member(s) to discuss the outcome of the task.
+Discuss your results and findings with your team members and potential issues.
+
+\begin{steps}
+\item Open the \verb|main.tex| file with Atom.
+\item Download the project description from Blackboard.
+\item Think about how to structure the introduction section based on the requirements listed on the project description sheet (consider also the assessment criteria).
+Use the subsection and subsubsection commands as appropriate.
+\item Use the itemize environment (see \verb|main.tex|) to document your first ideas about the features you like to realize.
+\item Optional: Add the modified \LaTeX{} sources to your Git portfolio and view it in GitLab.
+\end{steps}
+
+\begin{hints}
+\item You may want to consider to create a new project on GitLab for your report immediately and check-in the modified code. You could also use your existing portfolio.
+\item It is useful to exclude the generated files by creating an appropriate \verb|.gitignore| file, e.g., as provided on \url{https://github.com/github/gitignore/blob/master/TeX.gitignore}.
+\end{hints}
+
+\introduction{Special Characters}
+
+Certain characters cannot be typed into \LaTeX{} directly, and need to be escaped.
+
+\begin{tabular}{cccccccccc}
+    \& & \% & \$ & \# & \_ & \{ & \} & \textasciitilde & \textasciicircum & \textbackslash \\
+    \verb|\&| & \verb|\%| & \verb|\$| & \verb|\#| & \verb|\_| & \verb|\{| & \verb|\}| & \verb|\textasciitilde| & \verb|\textasciicircum| & \verb|\textbackslash| \\
+\end{tabular}
+
+The three full word commands will remove the space following them, to retain this space, you can either put \verb|~| after the command, or \verb|{}| after the command. The latter is preferred as it allows the space to be converted into a line break, where the former will always be a space.
+
+\introduction{Formatting text, spacing}
+
+\subsection*{Glyphs}
+
+The way characters look is determined by shape (alteration to the base glyph shape), series (alteration to the thickness of lines), and family (determines the underlying base shape). These can all be configured with the following commands.
+
+\begin{tabular}{lll}
+    \verb|\textsc{...}| & \textsc{Small Caps} & Small caps shape, used sometimes for titles or names. \\
+    \verb|\textup{...}| & \textup{upright} & Upright shape, usually the default. \\[2ex]
+    \verb|\textbf{...}| & \textbf{boldface} & Boldface series, good for headings \\
+    \verb|\textmd{...}| & \textmd{medium} & Medium series, usually the default. \\[2ex]
+    \verb|\textsf{...}| & \textsf{sans serif} & Serif family, used for posters \\
+    \verb|\textrm{...}| & \textrm{roman} & Roman family, usually the default. \\
+    \verb|\texttt{...}| & \texttt{typewriter} & Typewriter family, used for fixed-pitch characters. \\[2ex]
+    \verb|\emph{...}| & \emph{emphasized} & Emphasized text, often italic, recommended over \verb|\text**| commands.
+    %\verb|\textit{...}| & \textit{italic} & Italic shape, prefer \verb|\emph{...}|. \\
+    %\verb|\textsl{...}| & \textsl{slanted} & Slanted shape, avoid it.\\
+\end{tabular}
+
+\subsection*{Breaks}
+
+\LaTeX{} will automatically insert line, page, and paragraph breaks where it deems appropriate. Sometimes, you will want to manually set these.
+
+The command \verb|\\| will force a new line. This has an optional setting to specify the amount of space before the next line \verb|\\[1cm]|. Try these out in a document by putting them\\[5mm] in the middle of a line. (that gap was \verb|\\[5mm]|).
+
+To insert a page break, you can use \verb|\pagebreak|. You can also use \verb|\clearpage| which will insert a break and force all remaining figured and tables to be placed (\LaTeX{} does not post floating elements such as tables and figures exactly where you specify in the source code unless you force it.)
+
+\subsection*{Horizontal and Vertical Space}
+
+You can manually insert both horizontal and vertical spacing with \verb|\vspace| and \verb|\hspace|. These both take a required parameter of the distance to add. If vertical space is requested in the middle of a paragraph, it will insert it after the next line break. For example \verb|\hspace{1in}|\hspace{1in} will add a one inch horizontal space.
+
+Space requested by these is removed in some circumstances (such as horizontal space at the start of paragraphs), to force it to be placed anyway you can use \verb|vspace*{...}| and \verb|\hspace*{...}|.\\\hspace*{1in}which produces results like this line.
+
+\subsection*{Centering Text}
+You can center text by using a \verb|center| environment.
+
+\begin{lstlisting}
+\begin{center}
+This is in the center!
+\end{center}
+\end{lstlisting}
+\begin{center}
+This is in the center!
+\end{center}
+
+\introduction{Including Code, lstlisting}
+
+The library \verb|lstlisting| provides a versatile and configurable way to display Code.
+We provided a basic setup already in the template for you, however, here are more details in case you want to configure it further.
+There are other options available, such as \verb|minted| which provides slightly nicer syntax highlighting, but requires installing an external python tool in order to use.
+
+To use \verb|lstlisting|, first at the top of your document (in the preamble, before you \verb|\begin{document}|), you will need to import some packages. The main one is \verb|listings| but if you wish to colour your code, you should also import \verb|xcolor|. This provides nice default colours, and ways of defining custom colours.
+
+Next, you need to configure lstlisting for the language you wish to show. Here is a document that does a basic configuration for showing C++ code, and then displays a hello world program.
+
+As shown, this configuration can be done through parameters passed to the environment, or through custom configuration commands.
+
+In addition to this, you can include a file using \verb|\lstinputlisting{file}|.
+
+\includeLaTeX{./examples/ex2}
+
+You can find all of the settings that can be altered by \verb|\lstset| in the package documentation, available on CTAN. This is also true for the colours provided by \verb|xcolor|. \url{https://ctan.org/pkg/listings} \url{https://ctan.org/pkg/xcolor}
+
+\introduction{Including Images, Tables, Figures}
+
+Images can be included by using the \verb|graphicx| package \url{https://ctan.org/pkg/graphicx}. These should be placed inside figures to allow for captioning and referencing. By default, \LaTeX{} will attempt to position figures on the page for you as they are considered `floating environments.' This is often undesirable, the \verb|float| package \url{https://ctan.org/pkg/float} allows us to override this behaviour and position figures exactly where they are placed in the original source code.
+
+Tables are also placed inside a floating environment, there's is \verb|table|.
+
+\includeLaTeX{./examples/ex3}
+
+\textbf{Note: For the above code to compile, you will need to provide your own map for `theuniverse.jpg'}
+
+\introduction{Mathematics and Formula}
+
+Mathematical formula can be expressed in a few ways. There are hundreds of different Mathematical symbols which can be used, but all occur within \verb|$|. A single \verb|$| on either side of an expression will make it render as inline mathematics $\sum_{i=1}^{n}i=\frac{n(n+1)}{2}$. You can also use double \verb|$$| for larger equations.
+
+$$\int_{a}^{b}f(x)dx=\left[F(x)\right]_{a}^{b}=F(b)-F(a)$$
+
+You can find out more about different mathematical notations in the \LaTeX{} wikibook:\url{https://en.wikibooks.org/wiki/LaTeX/Mathematics}.
+
+\includeLaTeX{./examples/ex4}
+
+\introduction{Bibliography, citations and references}
+
+Your Bibliography is where you will place all of your references. This is done in a format called BibTeX.
+
+To use this, you must create a \verb|bibtex| file. Consider the following
+
+\begin{lstlisting}[language={}]
+@misc{knuthwebsite,
+    author    = "Donald Knuth",
+    title     = "Knuth: Computers and Typesetting",
+    url       = "http://www-cs-faculty.stanford.edu/\~{}uno/abcde.html"
+}
+@book{latexcompanion,
+    author    = "Michel Goossens and Frank Mittelbach and Alexander Samarin",
+    title     = "The \LaTeX\ Companion",
+    year      = "1993",
+    publisher = "Addison-Wesley",
+    address   = "Reading, Massachusetts"
+}
+\end{lstlisting}
+
+Place the above code in a file named \verb|sample.bib|. Then compile the following in the same directory.
+
+\includeLaTeX{./examples/ex5}
+
+In the project skeleton you have been provided, there is an already existing \verb|references.bib| file which you can modify.
+
+\introduction{Setting Up Your Development Environment}
+
+The project report template provided to you consists of three \verb|.tex| files, and expects a single \verb|.pdf| file to be provided to it.
+
+\begin{itemize}
+    \item \verb|project-report-template.tex|
+    \item \verb|main.tex|
+    \item \verb|appendix_code.tex|
+    \item \verb|code-delta.pdf|
+\end{itemize}
+
+Boot your computer into Linux (see earlier tutorials if you are unsure how to do this), and open the two \verb|.tex| documents in your preferred text editor. A text editor differs from an IDE such as Visual Studio as it does not provide built in tools for compiling. There are a few text editors pre-installed in the university Linux environment, these are Gedit, VSCode, and Vi. I'll be using VSCode for any screenshots in this document.
+
+You're also going to need a terminal emulator open to compile the documents. VSCode comes with a built in one that can be openned (View $\rightarrow$ Terminal), Vim can invoke one from inside the editor (\verb|:!{code}|), if you are using Gedit you will need to launch a seperate terminal emulator.
+
+If you wish to work on your project on a non-university computer, you are going to need to install a \LaTeX{} environment, or use an online software-as-a-service environment.
+For the latter,``Overleaf'' (\url{https://overleaf.com}) is a versatile and free tool.
+
+If you wish to set up your own environment, you will want to set up \verb|latexmk|.
+
+If you would like a recommendation for a text editor, you can download VSCode for all platforms from \url{https://code.visualstudio.com/}. Please note, despite the similar name, Visual Studio Code is entirely unrelated to the Visual Studio integrated development environment. You may then wish to install the \LaTeX{} Workshop package (\verb|James-Yu.latex-workshop|)
+
+\subsection*{On Linux}
+
+If you are actively using Linux in your personal life, I will assume the following instructions are sufficient.
+
+\begin{enumerate}
+    \item[] Using your package manager of choice (apt, yum, etc)
+    \item Install \verb|perl|
+    \item Install \verb|latexmk|
+\end{enumerate}
+
+\subsection*{On MacOS}
+
+\begin{enumerate}
+    \item Install MacTeX \url{http://www.tug.org/mactex/}
+    \item \verb|latexmk| is probably installed already at this point
+    \item If not, open `Tex Live Utility' and search for `latexmk' and install it.
+    \item If you prefer using a terminal \verb|sudo tlmgr install latexk|.
+\end{enumerate}
+
+\subsection*{On windows}
+
+\begin{enumerate}
+    \item Install MikTeX \url{https://miktex.org/}
+    \item Install perl \url{http://strawberryperl.com/}
+    \item \verb|latexmk| is probably installed already at this point
+    \item If it is not, open the `MikTeX package manager' and install the \verb|latexmk| package.
+\end{enumerate}
+
+\subsection*{All platforms (read after installing)}
+
+Once all this is done, run the following to check that the software is installed.
+
+\begin{lstlisting}[language=bash]
+$ latexmk -v
+Latexmk, John Collins, 17 March 2019. Version 4.63b
+\end{lstlisting}
+
+\end{document}

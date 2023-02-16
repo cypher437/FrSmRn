@@ -1,0 +1,39 @@
+\documentclass{article}
+\usepackage{listings}
+\usepackage[dvipsnames]{xcolor}
+
+\begin{document}
+
+\begin{lstlisting}[language=C++]
+#include <iostream>
+using namespace std;
+
+// The main function is the entry point for a program
+int main() {
+    cout << "Hello, World!";
+    return 0;
+}
+\end{lstlisting}
+
+\noindent\rule{\linewidth}{1pt}
+
+\lstset{
+    language=C++,
+    commentstyle=\color{BlueViolet},
+    keywordstyle=\bfseries\color{Mahogany},
+    numberstyle=\color{MidnightBlue},
+    stringstyle=\color{ForestGreen}
+}
+
+\begin{lstlisting}
+#include <iostream>
+using namespace std;
+
+// The main function is the entry point for a program
+int main() {
+    cout << "Hello, World!";
+    return 0;
+}
+\end{lstlisting}
+
+\end{document}

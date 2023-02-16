@@ -1,0 +1,190 @@
+% This file provides the generic header that sets up the page formatting and
+% common custom macro and environment definitions that will be used for the
+% C and C++ programming course.
+%
+% You can consult the `00-Example_Usage.tex` file for a full example of how to
+% use this header file.
+%
+
+% The documentclass is set to an a4 paper article using KOMA-script
+\documentclass[paper=a4]{scrartcl}
+\PassOptionsToPackage{hyphens}{url}
+\setlength\parindent{0pt}
+
+% Hyperref is used, allowing for linking between different parts of the pdf.
+\usepackage[breaklinks=true,colorlinks=true,linkcolor=red]{hyperref}
+\hypersetup{urlcolor=red}
+\def\UrlFont{\em}
+\usepackage{attachfile}
+
+% Geometry sets the exact dimensions of the page, overriding KOMA-scripts DIM.
+\usepackage[top=0.5in,bottom=1in,left=0.5in,right=0.5in]{geometry}
+
+% Tabu provides better tables than the built in tabular environment.
+\usepackage{tabu}
+
+% Allows us to use the H param for exact figure placement
+\usepackage{float}
+% Provides todos
+\usepackage{todonotes}
+\newcommand{\jk}[1]{\todo[inline,color=green]{JK: #1}}
+\newcommand{\llb}[1]{\todo[inline,color=blue!20]{LLB: #1}}
+\newcommand{\ob}[1]{\todo[inline,color=red!20]{OB: #1}}
+
+% Adds additional section configuration options, these mirror `\date` and
+% `\author` in behaviour.
+\usepackage{totcount}
+\makeatletter
+\newcounter{cs@exercise}
+\newcommand{\exercise}[1]{\setcounter{cs@exercise}{#1}}
+\newcommand{\theexercise}{\arabic{cs@exercise}}
+\newcounter{cs@xmarks}
+\regtotcounter{cs@xmarks}
+\newcommand{\totalxmarks}{\total{cs@xmarks}}
+\newcommand{\addxmark}[1]{\addtocounter{cs@xmarks}{#1}}
+\newcounter{cs@minutes}
+\regtotcounter{cs@minutes}
+\newcommand{\totalminutes}{\total{cs@minutes}}
+\newcommand{\addminutes}[1]{\addtocounter{cs@minutes}{#1}}
+\newtoks{\internal@term}
+\newcommand{\term}[1]{\internal@term={#1}}
+\newcommand{\theterm}{\the\internal@term}
+\makeatother
+
+% The following are used to configure the footer of the document.
+\usepackage{lastpage}
+\usepackage{fancyhdr}
+\usepackage{titling}
+\usepackage{textcomp}
+\pagestyle{fancy}
+\fancyhf{}
+\rhead{}
+\lhead{}
+\lfoot{CS1PR, Tutorial -- Week \theexercise{}}
+\cfoot{\thedate}
+\rfoot{\thepage/\pageref{LastPage}}
+
+% Listings is used for the inclusion of source code.
+\usepackage{xcolor}
+\usepackage{textcomp} %for upquote=true (straight quotes)
+\usepackage{listings}
+\definecolor{pblue}{rgb}{0.13,0.13,1}
+\definecolor{pgreen}{rgb}{0,0.5,0}
+\definecolor{pred}{rgb}{0.9,0,0}
+\definecolor{pgrey}{rgb}{0.46,0.45,0.48}
+\lstset{
+	basicstyle=\ttfamily\footnotesize,
+	numberstyle=\ttfamily\tiny,
+	frame=single,
+	numbers=left,
+	numbersep=1em,
+	xleftmargin=2em,
+	language=[AlLaTeX]TeX,
+	breaklines=true,
+	breakatwhitespace=true,
+	postbreak=\hbox{$\hookrightarrow$ },
+	showstringspaces=false,
+	tabsize=2,
+    commentstyle=\color{pgreen},
+    keywordstyle=\color{pblue},
+    texcsstyle=*\color{pblue},
+	stringstyle=\color{pred},
+	moredelim=[il][\textcolor{pgrey}]{\[\]},
+	moredelim=[is][\textcolor{pgrey}]{\%\%}{\%\%},
+    columns=fullflexible,
+    upquote=true,
+    morekeywords={maketitle,subsection,article}
+}
+\usepackage{cleveref}
+
+\parskip 8pt
+
+\term{Autumn 2019}
+
+% The following defines the command \makesheetheader which is used to create
+% the header shown at the top of every exercise sheet.
+\definecolor{infobox}{HTML}{e0f7fa}
+\newcommand{\makesheetheader}{%
+    \thispagestyle{empty}
+    \begin{center}
+    	\begin{tabular*}{\textwidth}{@{}l@{\extracolsep{\fill}}r@{}}
+    	  University of Reading & \LaTeX Tutorial \\
+    		Department of Computer Science	& CS1PR / \theterm \\
+         & \totalminutes{} Minutes\\
+    		\theauthor & Date: \thedate \\
+    		& \\
+    		\hline
+    	\end{tabular*}
+    \end{center}%
+}
+
+% The following commands are used to declare the starts of each section, with how long they are expected to take and how many marks are expected if any.
+\newcommand{\generaltoc}[2]{%
+	\addtocounter{section}{1}%
+	\section*{\arabic{section}. #2: #1}%
+	\addcontentsline{toc}{section}{\arabic{section}. #2: #1}%
+	\setcounter{subsection}{0}
+}
+\newcommand{\introduction}[1]{%
+		\generaltoc{#1}{Introduction}
+}
+
+\newcommand{\tutorial}[2]{%
+		\generaltoc{#1}{Tutorial (#2 Minutes)}%
+		\addminutes{#2}%
+}
+\newcommand{\groupwork}[2]{%
+    \generaltoc{#1}{Group Work (#2 Minutes)}%
+    \addminutes{#2}%
+}
+
+% The following define reusable subsections.
+\newenvironment{critera}{%
+    \subsection*{Marking Criteria}
+    \begin{itemize}
+}{%
+    \end{itemize}
+}
+\newenvironment{criteria*}{
+    \subsection*{Marking Criteria}
+}{}
+\newenvironment{steps}{%
+    \subsection*{Steps}
+    \begin{enumerate}
+}{%
+    \end{enumerate}
+}
+\newenvironment{steps*}{
+    \subsection*{Steps}
+}{}
+\newenvironment{literature}{%
+    \subsection*{Further Reading}
+    \begin{itemize}
+}{
+    \end{itemize}
+}
+\newenvironment{literature*}{
+    \subsection*{Further Reading}
+}{}
+\newenvironment{hints}{%
+    \subsection*{Hints}
+    \begin{itemize}
+}{
+    \end{itemize}
+}
+\newenvironment{hints*}{
+    \subsection*{Hints}
+}{}
+% These are not currently used, and if the previous definitions were anything
+% to go by should likely be replaced by environments also.
+% \newcommand{\Input}{\subsection*{Input}}
+% \newcommand{\Output}{\subsection*{Output}}
+% \newcommand{\example}{\subsection*{Example}}
+
+\newcommand{\cmd}[1]{\texttt{\$~#1}}
+\newcommand{\func}[1]{\texttt{#1()}}
+
+\newcommand{\includeLaTeX}[1]{%
+    Source Code: File \texttt{#1.tex} (Code: \attachfile{#1.tex}) (PDF: \attachfile{#1.pdf}) \\%
+    \lstinputlisting{#1.tex}%
+}
